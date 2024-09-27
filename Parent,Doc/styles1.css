@@ -1,0 +1,113 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body and Font Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Header Styles */
+header {
+    background-color:rgb(104, 153, 197);
+    color: #fff;
+    padding: 20px 0;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+}
+
+header h1 {
+    text-align: center;
+    margin: 0;
+    font-size: 24px;
+    margin-left: 587px; /* To give space between the logo and the text */
+}
+
+/* Logo Image */
+.logo-image img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%; /* Make the logo round */
+}
+
+/* Navigation Styles */
+nav {
+    margin-top: 10px;
+}
+
+.navbar {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+}
+
+.navbar li {
+    margin: 0 15px;
+}
+
+.navbar li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.navbar li a:hover {
+    text-decoration: underline;
+}
+
+/* Main Content Styles */
+main {
+    padding: 20px;
+    text-align: center;
+}
+
+main h2 {
+    margin-bottom: 10px;
+    font-size: 28px;
+}
+
+main p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+/* Footer Styles */
+footer {
+    background-color:rgb(104, 153, 197);
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+    }
+
+    .navbar li {
+        margin: 10px 0;
+    }
+
+    .container {
+        flex-direction: column;
+    }
+
+    .logo {
+        margin-top: 10px;
+    }
+}

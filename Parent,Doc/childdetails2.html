@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Child Profile Dashboard</title>
+  <style>
+    body {
+      background-color: #e3f2fd; /* light blue */
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      position: relative;
+    }
+
+    .profile-dashboard {
+      max-width: 500px; /* Smaller profile section */
+      margin: 50px auto;
+      padding: 20px;
+      background-color: #e3f2fd; /* light blue */
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      position: relative;
+    }
+
+    h1, h2 {
+      text-align: center;
+      color: #2D3748;
+    }
+
+    .child-profile, .parent-section, .doctor-section {
+      margin: 10px 0;
+    }
+
+    .info-item {
+      margin-bottom: 15px;
+    }
+
+    .info-item input, .info-item select, .section-content input {
+      border: none;
+      border-bottom: 1px solid #ccc;
+      width: 100%;
+      font-size: 16px;
+      padding: 5px;
+      outline: none;
+      background-color: transparent;
+    }
+
+    .info-item input:focus, .info-item select:focus, .section-content input:focus {
+      border-bottom: 1px solid #90caf9;
+    }
+
+    button {
+      background-color: #90caf9; /* light blue */
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-right: 10px;
+    }
+
+    button:hover {
+      background-color: #64b5f6;
+    }
+
+    .view-selector {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    #parentSection, #doctorSection {
+      display: none;
+    }
+
+    .section-content {
+      padding: 15px;
+      background-color: #e3f2fd; /* light blue */
+      border-radius: 5px;
+      margin-bottom: 15px;
+    }
+
+    .save-button {
+      background-color: #4caf50; /* Green */
+      margin-top: 20px;
+    }
+
+    /* Logo and profile picture styles */
+    .logo {
+      position: absolute;
+      top: 5px;
+      left: 10px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: contain;
+      background-color: transparent;
+    }
+
+    .profile-picture-container {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+
+    .profile-picture {
+      position: relative;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .profile-picture-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .upload-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.3);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      border-radius: 50%;
+      padding: 5px;
+      box-sizing: border-box;
+    }
+
+    .upload-overlay div {
+      font-size: 12px;
+      color: white;
+      cursor: pointer;
+      text-align: center;
+      margin: 0 5px;
+    }
+
+    .upload-overlay input {
+      display: none;
+    }
+
+    .profile-picture:hover .upload-overlay {
+      display: flex;
+    }
+
+    .back-to-child {
+      display: none;
+      margin: 20px auto;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <img src="Symbol.png" alt="Logo" class="logo"> <a href="C:\Users\disha\OneDrive\Desktop\oops with java\ccr\homepage.html"> </a><!-- Replace 'Symbol.png' with your logo file -->
+
+  <div class="profile-picture-container">
+    <div class="profile-picture" onclick="document.getElementById('profilePicUpload').click()">
+      <img id="profilePic" src="default-profile-pic.png" alt="Profile Picture"> <!-- Replace 'default-profile-pic.png' with a default image -->
+      <div class="upload-overlay">
+        <div class="view-btn" onclick="viewProfilePic(event)">View</div>
+        <label for="profilePicUpload" class="upload-btn">Upload</label>
+        <input type="file" id="profilePicUpload" accept="image/*" onchange="previewProfilePic()">
+      </div>
+    </div>
+  </div>
+
+  <div class="profile-dashboard">
+    <h1>Child Profile</h1>
+
+    <!-- Switch between Parent and Doctor View -->
+    <div class="view-selector">
+      <button id="parentViewBtn">Parent View</button>
+      <button id="doctorViewBtn">Doctor View</button>
+      <button id="backToChildPage" class="back-to-child">Back to Child Details</button>
+    </div>
+
+    <!-- Child's Basic Information -->
+    <div class="child-profile">
+      <div class="info-item">
+        <label><strong>Name:</strong></label>
+        <input type="text" id="child-name" value="John">
+      </div>
+      <div class="info-item">
+        <label><strong>Age:</strong></label>
+        <input type="number" id="child-age" value="10">
+      </div>
+      <div class="info-item">
+        <label><strong>Sex:</strong></label>
+        <select id="child-sex">
+          <option value="Male" selected>Male</option>
+          <option value="Female">Female</option>
+          <option value="Transgender">Transgender</option>
+        </select>
+      </div>
+      <div class="info-item">
+        <label><strong>Condition:</strong></label>
+        <input type="text" id="child-condition" value="Autism">
+      </div>
+      <button class="save-button" onclick="saveChildDetails()">Save Child Details</button>
+    </div>
+
+    <!-- Parent's Section -->
+    <div class="parent-section" id="parentSection">
+      <h2>Parent's Section</h2>
+      <div class="section-content">
+        <p>Progress in home-based training:</p>
+        <input type="text" value="65%" id="trainingProgress">
+        <p>Parental Notes:</p>
+        <input type="text" value="John has been improving in recognizing shapes." id="parentNotes">
+      </div>
+      <button class="save-button" onclick="saveParentDetails()">Save Parent Details</button>
+      <button id="backToChildPageParent">Back to Child Details</button>
+    </div>
+
+    <!-- Doctor's Section -->
+    <div class="doctor-section" id="doctorSection">
+      <h2>Doctor's Section</h2>
+      <div class="section-content">
+        <p>EEG Report Summary:</p>
+        <input type="text" value="Alpha waves are showing steady improvement." id="eegReport">
+        <p>Recommendations:</p>
+        <input type="text" value="Continue neurofeedback sessions twice a week." id="doctorRecommendations">
+      </div>
+      <button class="save-button" onclick="saveDoctorDetails()">Save Doctor Details</button>
+      <button id="backToChildPageDoctor">Back to Child Details</button>
+    </div>
+
+  </div>
+
+  <script>
+    // View toggle logic for Parent and Doctor sections
+    const parentViewBtn = document.getElementById('parentViewBtn');
+    const doctorViewBtn = document.getElementById('doctorViewBtn');
+    const parentSection = document.getElementById('parentSection');
+    const doctorSection = document.getElementById('doctorSection');
+    const backToChildPage =  document.getElementById('backToChildPage');
+    const backToChildPageParent = document.getElementById('backToChildPageParent');
+    const backToChildPageDoctor = document.getElementById('backToChildPageDoctor');
+
+    parentViewBtn.addEventListener('click', function() {
+      parentSection.style.display = 'block';
+      doctorSection.style.display = 'none';
+      backToChildPage.style.display = 'block';
+    });
+
+    doctorViewBtn.addEventListener('click', function() {
+      parentSection.style.display = 'none';
+      doctorSection.style.display = 'block';
+      backToChildPage.style.display = 'block';
+    });
+
+    backToChildPageParent.addEventListener('click', function() {
+      parentSection.style.display = 'none';
+      doctorSection.style.display = 'none';
+      backToChildPage.style.display = 'none';
+    });
+
+    backToChildPageDoctor.addEventListener('click', function() {
+      parentSection.style.display = 'none';
+      doctorSection.style.display = 'none';
+      backToChildPage.style.display = 'none';
+    });
+
+    // Profile picture upload logic
+    function previewProfilePic() {
+      const file = document.getElementById('profilePicUpload').files[0];
+      const reader = new FileReader();
+
+      reader.onloadend = function() {
+        document.getElementById('profilePic').src = reader.result;
+      };
+
+      if (file) {
+        reader.readAsDataURL(file);
+      } else {
+        document.getElementById('profilePic').src = 'default-profile-pic.png'; // fallback to default image
+      }
+    }
+
+    function viewProfilePic(event) {
+      event.stopPropagation();
+      alert('Profile picture viewed!');
+    }
+
+    // Save button functionality (basic example for now)
+    function saveChildDetails() {
+      alert('Child details saved!');
+    }
+
+    function saveParentDetails() {
+      alert('Parent details saved!');
+    }
+
+    function saveDoctorDetails() {
+      alert('Doctor details saved!');
+    }
+  </script>
+</body>
+</html>
