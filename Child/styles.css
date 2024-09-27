@@ -1,0 +1,71 @@
+/* Basic styling for the dashboard and individual pages */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2 {
+    color: #333;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+.dashboard-options {
+    display: flex;
+    justify-content: space-between;
+}
+
+.option {
+    text-align: center;
+}
+
+.dashboard-image {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: transform 0.3s;
+}
+
+.dashboard-image:hover {
+    transform: scale(1.1);
+}
+
+.go-back {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #ff5c5c;
+    color: white;
+    text-align: center;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.go-back:hover {
+    background-color: #ff3333;
+}
+
+#game-details {
+    margin-top: 20px;
+}

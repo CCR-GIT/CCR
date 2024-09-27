@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Scramble Game</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .scrambled-word {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .answer-box {
+            margin-bottom: 20px;
+        }
+
+        .score {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Word Scramble Game</h1>
+        <p class="score">Score: <span id="score">0</span></p>
+
+        <div id="scramble-area">
+            <div class="scrambled-word" id="scrambledWord"></div>
+            <div class="answer-box">
+                <input type="text" id="answer" placeholder="Your Answer">
+                <button onclick="checkWord()">Submit</button>
+            </div>
+            <div id="feedback"></div>
+        </div>
+
+        <!-- Go back button to return to the Child Dashboard -->
+        <a href="child.html" class="go-back">Go Back to Child Dashboard</a>
+    </div>
+
+    <script>
+        const words = ['apple', 'banana', 'orange', 'grape', 'pear'];
+        let correctWord;
+        let score = 0;
+
+        function shuffleWord(word) {
+            return word.split('').sort(() => 0.5 - Math.random()).join('');
+        }
+
+        function generateScramble() {
+            correctWord = words[Math.floor(Math.random() * words.length)];
+            document.getElementById('scrambledWord').innerText = shuffleWord(correctWord);
+        }
+
+        function checkWord() {
+            const userAnswer = document.getElementById('answer').value.toLowerCase();
+            const feedback = document.getElementById('feedback');
+
+            if (userAnswer === correctWord) {
+                score += 10;
+                feedback.innerText = "Correct!";
+            } else {
+                feedback.innerText = `Wrong! The correct word was ${correctWord}`;
+            }
+            document.getElementById('score').textContent = score;
+            generateScramble();
+        }
+
+        // Start with a scrambled word
+        generateScramble();
+    </script>
+</body>
+</html>

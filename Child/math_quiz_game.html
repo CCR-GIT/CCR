@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Quiz Game</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .question {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .answer-box {
+            margin-bottom: 20px;
+        }
+
+        .score {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Math Quiz Game</h1>
+        <p class="score">Score: <span id="score">0</span></p>
+
+        <div id="quiz-area">
+            <div class="question" id="question"></div>
+            <div class="answer-box">
+                <input type="number" id="answer" placeholder="Your Answer">
+                <button onclick="checkAnswer()">Submit</button>
+            </div>
+            <div id="feedback"></div>
+        </div>
+
+        <!-- Go back button to return to the Child Dashboard -->
+        <a href="child.html" class="go-back">Go Back to Child Dashboard</a>
+    </div>
+
+    <script>
+        let correctAnswer;
+        let score = 0;
+
+        function generateQuestion() {
+            const num1 = Math.floor(Math.random() * 10) + 1;
+            const num2 = Math.floor(Math.random() * 10) + 1;
+            correctAnswer = num1 + num2;
+            document.getElementById('question').innerText = `${num1} + ${num2} = ?`;
+        }
+
+        function checkAnswer() {
+            const userAnswer = parseInt(document.getElementById('answer').value);
+            const feedback = document.getElementById('feedback');
+
+            if (userAnswer === correctAnswer) {
+                score += 10;
+                feedback.innerText = "Correct!";
+            } else {
+                feedback.innerText = `Wrong! The correct answer is ${correctAnswer}`;
+            }
+            document.getElementById('score').textContent = score;
+            generateQuestion();
+        }
+
+        // Start with a question
+        generateQuestion();
+    </script>
+</body>
+</html>

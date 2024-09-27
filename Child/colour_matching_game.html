@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Matching Game</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .color-box {
+            width: 100px;
+            height: 100px;
+            display: inline-block;
+            margin: 10px;
+            cursor: pointer;
+        }
+
+        .score {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Color Matching Game</h1>
+        <p class="score">Score: <span id="score">0</span></p>
+
+        <div id="game-area">
+            <div class="color-box" style="background-color: red;" data-color="red"></div>
+            <div class="color-box" style="background-color: blue;" data-color="blue"></div>
+            <div class="color-box" style="background-color: green;" data-color="green"></div>
+            <div class="color-box" style="background-color: yellow;" data-color="yellow"></div>
+        </div>
+
+        <!-- Go back button to return to the Child Dashboard -->
+        <a href="child.html" class="go-back">Go Back to Child Dashboard</a>
+    </div>
+
+    <script>
+        const boxes = document.querySelectorAll('.color-box');
+        const scoreDisplay = document.getElementById('score');
+        let score = 0;
+
+        boxes.forEach(box => {
+            box.addEventListener('click', () => {
+                score += 10;
+                scoreDisplay.textContent = score;
+            });
+        });
+    </script>
+</body>
+</html>

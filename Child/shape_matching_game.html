@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shape Matching Game</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .shape-box {
+            width: 100px;
+            height: 100px;
+            margin: 10px;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+
+        .match-area {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .target-shape {
+            width: 150px;
+            height: 150px;
+            margin-bottom: 20px;
+            border: 5px solid #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Shape Matching Game</h1>
+        <p>Click the shape that matches the target below.</p>
+
+        <div class="target-shape" id="targetShape"></div>
+
+        <div class="match-area">
+            <div class="shape-box" id="shape1"></div>
+            <div class="shape-box" id="shape2"></div>
+            <div class="shape-box" id="shape3"></div>
+        </div>
+
+        <!-- Go back button to return to the Child Dashboard -->
+        <div class="section">
+            <a href="child.html" class="go-back">Go Back to Child Dashboard</a>
+        </div>
+    </div>
+
+    <script>
+        const shapes = ['circle', 'square', 'triangle'];
+        const targetShapeBox = document.getElementById('targetShape');
+        const shapeBoxes = document.querySelectorAll('.shape-box');
+
+        let targetShape = '';
+
+        function setRandomShape() {
+            targetShape = shapes[Math.floor(Math.random() * shapes.length)];
+            targetShapeBox.innerText = targetShape.charAt(0).toUpperCase() + targetShape.slice(1);
+            
+            shapeBoxes.forEach((box, index) => {
+                box.innerText = shapes[index].charAt(0).toUpperCase() + shapes[index].slice(1);
+                box.onclick = function() {
+                    checkMatch(this.innerText.toLowerCase());
+                };
+            });
+        }
+
+        function checkMatch(selectedShape) {
+            if (selectedShape === targetShape) {
+                alert('Correct Match! Good Job!');
+            } else {
+                alert('Wrong! Try Again.');
+            }
+            setRandomShape(); // Reset with a new target shape
+        }
+
+        // Set initial random shape
+        setRandomShape();
+    </script>
+</body>
+</html>

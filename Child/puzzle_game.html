@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puzzle Game</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        #puzzle-container {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-gap: 5px;
+            margin-bottom: 20px;
+        }
+
+        .puzzle-piece {
+            width: 100px;
+            height: 100px;
+            background-color: #ddd;
+            text-align: center;
+            line-height: 100px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .score {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Puzzle Game</h1>
+        <p class="score">Score: <span id="score">0</span></p>
+
+        <div id="puzzle-container"></div>
+
+        <!-- Go back button to return to the Child Dashboard -->
+        <a href="child.html" class="go-back">Go Back to Child Dashboard</a>
+    </div>
+
+    <script>
+        const container = document.getElementById('puzzle-container');
+        const scoreDisplay = document.getElementById('score');
+        const pieces = ['1', '2', '3', '4', '5', '6', '7', '8', ' '];
+        let score = 0;
+
+        function createPuzzle() {
+            shuffle(pieces);
+            pieces.forEach(piece => {
+                const pieceElement = document.createElement('div');
+                pieceElement.classList.add('puzzle-piece');
+                pieceElement.textContent = piece;
+                pieceElement.addEventListener('click', movePiece);
+                container.appendChild(pieceElement);
+            });
+        }
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function movePiece() {
+            // Implement logic to move puzzle pieces and check for completion
+            score += 10; // Increment score for moves (this is just an example)
+            scoreDisplay.textContent = score;
+        }
+
+        // Initialize puzzle
+        createPuzzle();
+    </script>
+</body>
+</html>

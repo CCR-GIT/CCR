@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reaction Time Game</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .reaction-box {
+            width: 200px;
+            height: 200px;
+            background-color: #f0f0f0;
+            margin: 0 auto;
+            margin-top: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .ready-message {
+            text-align: center;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Reaction Time Game</h1>
+        <p>Click the box as soon as it turns green!</p>
+
+        <div class="reaction-box" id="reactionBox">Wait...</div>
+
+        <div class="ready-message" id="readyMessage">Get Ready!</div>
+
+        <!-- Go back button to return to the Child Dashboard -->
+        <div class="section">
+            <a href="child.html" class="go-back">Go Back to Child Dashboard</a>
+        </div>
+    </div>
+
+    <script>
+        const reactionBox = document.getElementById('reactionBox');
+        const readyMessage = document.getElementById('readyMessage');
+
+        let startTime;
+        let timeoutID;
+
+        function startGame() {
+            readyMessage.innerText = 'Wait for Green...';
+
+            // Random delay before the box turns green
+            const randomDelay = Math.floor(Math.random() * 3000) + 2000;
+            
+            timeoutID = setTimeout(() => {
+                reactionBox.style.backgroundColor = 'green';
+                reactionBox.innerText = 'Click Now!';
+                startTime = new Date().getTime(); // Record the time when it turns green
+            }, randomDelay);
+        }
+
+        reactionBox.addEventListener('click', () => {
+            if (reactionBox.style.backgroundColor === 'green') {
+                const reactionTime = new Date().getTime() - startTime;
+                readyMessage.innerText = `Your reaction time: ${reactionTime}ms`;
+                resetGame();
+            } else {
+                readyMessage.innerText = 'Too Soon! Wait for green!';
+                clearTimeout(timeoutID);
+                resetGame();
+            }
+        });
+
+        function resetGame() {
+            reactionBox.style.backgroundColor = '#f0f0f0';
+            reactionBox.innerText = 'Wait...';
+            setTimeout(startGame, 2000); // Restart the game after a brief delay
+        }
+
+        startGame(); // Start the game when the page loads
+    </script>
+</body>
+</html>
