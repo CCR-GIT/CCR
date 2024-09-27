@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and Landing Page</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Background Video -->
+    <video autoplay muted loop id="background-video">
+        <source src="Video Back.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <!-- Login Container -->
+    <div class="container" id="login-container">
+        <div class="login-box">
+            <img src="Logo.png" alt="Top Image" class="top-image">
+            <h2>Login</h2>
+            <form id="login-form">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="Enter your name" required>
+
+                <label for="age">Age</label>
+                <input type="number" id="age" name="age" placeholder="Enter your age" required>
+
+                <label for="dob">Date of Birth</label>
+                <input type="date" id="dob" name="dob" required>
+
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+
+    <!-- Landing Page -->
+    <div class="landing-container" id="landing-container" style="display: none;">
+        <div class="logo-container">
+            <a href="Login.html">
+                <img src="Symbol.png" alt="Logo" class="logo-image">
+            </a>
+        </div>
+        <img src="path/to/your/landing-image.jpg" alt="" class="landing-image">
+        <h1>Welcome! Please select an option:</h1>
+        <div class="options">
+            <a href="parent-doctor.html" class="option-button">Parent/Doctor</a>
+            <a href="child.html" class="option-button">Child</a>
+        </div>
+    </div>
+
+    <!-- JavaScript to handle form submission and navigation -->
+    <script>
+        // JavaScript to handle the transition between login and landing page
+        document.getElementById('login-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+    
+            // Hide login form and show landing page
+            document.getElementById('login-container').style.display = 'none';
+            document.getElementById('landing-container').style.display = 'block';
+    
+            // Push the landing page state to history
+            history.pushState({ page: 'landing' }, 'Landing Page', 'landing.html');
+        });
+
+        // Handle back navigation
+        window.onpopstate = function(event) {
+            if (event.state && event.state.page === 'landing') {
+                // Show login form and hide landing page
+                document.getElementById('login-container').style.display = 'block';
+                document.getElementById('landing-container').style.display = 'none';
+            }
+        };
+    </script>
+</body>
+</html>
